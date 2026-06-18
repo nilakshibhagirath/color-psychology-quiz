@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Color Psychology Quiz"
+version = "1.0.0"
+id = "artifacts/color-quiz"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22929
+
+[services.development]
+run = "pnpm --filter @workspace/color-quiz run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/color-quiz", "run", "build" ]
+publicDir = "artifacts/color-quiz/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22929"
+BASE_PATH = "/"
